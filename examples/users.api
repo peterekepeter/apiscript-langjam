@@ -1,0 +1,37 @@
+table users {                                       // CREATE TABLE users (
+    id: pk int;                                     //     id INT PRIMARY KEY,
+    name: str;                                      //     name VARCHAR,
+    password: str;                                  //     password VARCHAR,
+    is_organisation_admin: bool;                    //     is_organisation_admin BOOL,
+    is_database_admin: bool;                        //     is_database_admin BOOL,
+    organisation: fk(organisations.id) as users;    //     FOREIGN KEY(organisation) REFERENCES organisations(id)
+}                                                   // );
+
+table organisations {                               // CREATE TABLE organisations (
+    id: pk int;                                     //     id INT PRIMARY KEY,
+    name: str;                                      //     name VARCHAR
+}                                                   // );
+
+
+
+GET /users => 
+    // SELECT users.id, users.name, users.is_organisation_admin, users.is_database_admin, organisations.id, organisations.name
+    // FROM users INNER JOIN organisations ON users.organisation = organisations.id;
+    select users(id, name, is_organisation_admin, is_database_admin, organisation(id, name)) | format json;
+
+GET /users/{user:users.id} =>
+    // SELECT users.id, users.name, users.is_organisation_admin, users.is_database_admin, organisations.id, organisations.name
+    // FROM users INNER JOIN organisations ON user.organisation = organisations.id WHERE users.id = {user};
+    // {user} is the SQL-escaped value taken from the URL
+    $user | exclude password | join organisation(id, name) | format json;
+
+GET /organisations =>
+    // SELECT id, name FROM organisations;
+    select organisations(id, name) | format json;
+
+GET /organisations/{organisation:organisations.id} =>
+    // SELECT organisations.id, organisations.name, users.id, users.name, users.is_organisation_admin, users.is_database_admin
+    // FROM organisations INNER JOIN users ON organisations.id = users.organisation WHERE organisations.id = {organisation};
+    // {organisation} id the SQL-escaped value taken from the URL
+    select $organisation | join users(id, name, is_organisation_admin, is_database_admin) | format json;
+
