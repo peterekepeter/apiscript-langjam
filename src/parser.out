@@ -42,55 +42,56 @@ Rule 36    compound_name_list_not_start -> empty
 Rule 37    compound_name -> NAME DOT compound_name
 Rule 38    compound_name -> NAME
 Rule 39    db_query_list -> db_query_item COMMA db_query_list
-Rule 40    db_query_list -> empty
-Rule 41    db_query_item -> db_query
-Rule 42    db_query_item -> NAME
-Rule 43    db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN
-Rule 44    raw_value -> STRING
-Rule 45    raw_value -> INTEGER
-Rule 46    raw_value -> DOUBLE
-Rule 47    raw_value -> BOOLEAN
-Rule 48    raw_value -> NULL
-Rule 49    raw_value -> list
-Rule 50    raw_value -> object
-Rule 51    list -> OPEN_BRACKET list_elements CLOSE_BRACKET
-Rule 52    list_elements -> raw_value COMMA list_elements
-Rule 53    list_elements -> empty
-Rule 54    object -> OPEN_BRACES object_elements CLOSE_BRACES
-Rule 55    object_elements -> STRING COLON raw_value COMMA object_elements
-Rule 56    object_elements -> empty
-Rule 57    empty -> <empty>
+Rule 40    db_query_list -> db_query_item
+Rule 41    db_query_list -> empty
+Rule 42    db_query_item -> db_query
+Rule 43    db_query_item -> NAME
+Rule 44    db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN
+Rule 45    raw_value -> STRING
+Rule 46    raw_value -> INTEGER
+Rule 47    raw_value -> DOUBLE
+Rule 48    raw_value -> BOOLEAN
+Rule 49    raw_value -> NULL
+Rule 50    raw_value -> list
+Rule 51    raw_value -> object
+Rule 52    list -> OPEN_BRACKET list_elements CLOSE_BRACKET
+Rule 53    list_elements -> raw_value COMMA list_elements
+Rule 54    list_elements -> empty
+Rule 55    object -> OPEN_BRACES object_elements CLOSE_BRACES
+Rule 56    object_elements -> STRING COLON raw_value COMMA object_elements
+Rule 57    object_elements -> empty
+Rule 58    empty -> <empty>
 
 Terminals, with rules where they appear
 
 AS                   : 15
-BOOLEAN              : 47
+BOOLEAN              : 48
 CAPTURING_SEGMENT    : 21
-CLOSE_BRACES         : 4 54
-CLOSE_BRACKET        : 51
-CLOSE_PAREN          : 15 43
-COLON                : 9 55
-COMMA                : 35 39 52 55
+CLOSE_BRACES         : 4 55
+CLOSE_BRACKET        : 52
+CLOSE_PAREN          : 15 44
+COLON                : 9 56
+COMMA                : 35 39 53 56
 DOLLAR_SIGN          : 28
 DOT                  : 15 17 37
-DOUBLE               : 46
+DOUBLE               : 47
 EXCLUDE              : 30
 FK                   : 15
 FORMAT               : 29
-INTEGER              : 45
+INTEGER              : 46
 JOIN                 : 31
 LAMBDA               : 16
 METHOD               : 16
-NAME                 : 4 9 14 15 15 15 28 29 37 38 42
-NULL                 : 48
-OPEN_BRACES          : 4 54
-OPEN_BRACKET         : 51
-OPEN_PAREN           : 15 43
+NAME                 : 4 9 14 15 15 15 28 29 37 38 43
+NULL                 : 49
+OPEN_BRACES          : 4 55
+OPEN_BRACKET         : 52
+OPEN_PAREN           : 15 44
 PATH_SEGMENT         : 20
 PIPE                 : 25
 SELECT               : 32
 SEMICOLON            : 9 16
-STRING               : 44 55
+STRING               : 45 56
 TABLE                : 4
 UPDIR_SEGMENT        : 18
 error                : 
@@ -99,24 +100,24 @@ Nonterminals, with rules where they appear
 
 command              : 24 25
 commands             : 24 25
-compound_name        : 33 35 37 43
+compound_name        : 33 35 37 44
 compound_name_list   : 30
 compound_name_list_not_start : 33 35
-db_query             : 31 32 41
-db_query_item        : 39
-db_query_list        : 39 43
-empty                : 1 6 8 11 23 26 34 36 40 53 56
+db_query             : 31 32 42
+db_query_item        : 39 40
+db_query_list        : 39 44
+empty                : 1 6 8 11 23 26 34 36 41 54 57
 endpoint             : 16 22
 endpoint_definition  : 2
 endpoint_not_start   : 17 18 19
-list                 : 49
-list_elements        : 51 52
-object               : 50
-object_elements      : 54 55
+list                 : 50
+list_elements        : 52 53
+object               : 51
+object_elements      : 55 56
 opt_endpoint         : 20 21
 opt_table_column_types : 9
 program              : 2 3 0
-raw_value            : 27 52 55
+raw_value            : 27 53 56
 statement            : 16
 table_column         : 5 7
 table_column_type    : 9 12 13
@@ -133,11 +134,11 @@ state 0
     (1) program -> . empty
     (2) program -> . endpoint_definition program
     (3) program -> . table_definition program
-    (57) empty -> .
+    (58) empty -> .
     (16) endpoint_definition -> . METHOD endpoint LAMBDA statement SEMICOLON
     (4) table_definition -> . TABLE NAME OPEN_BRACES table_columns CLOSE_BRACES
 
-    $end            reduce using rule 57 (empty -> .)
+    $end            reduce using rule 58 (empty -> .)
     METHOD          shift and go to state 5
     TABLE           shift and go to state 6
 
@@ -165,11 +166,11 @@ state 3
     (1) program -> . empty
     (2) program -> . endpoint_definition program
     (3) program -> . table_definition program
-    (57) empty -> .
+    (58) empty -> .
     (16) endpoint_definition -> . METHOD endpoint LAMBDA statement SEMICOLON
     (4) table_definition -> . TABLE NAME OPEN_BRACES table_columns CLOSE_BRACES
 
-    $end            reduce using rule 57 (empty -> .)
+    $end            reduce using rule 58 (empty -> .)
     METHOD          shift and go to state 5
     TABLE           shift and go to state 6
 
@@ -184,11 +185,11 @@ state 4
     (1) program -> . empty
     (2) program -> . endpoint_definition program
     (3) program -> . table_definition program
-    (57) empty -> .
+    (58) empty -> .
     (16) endpoint_definition -> . METHOD endpoint LAMBDA statement SEMICOLON
     (4) table_definition -> . TABLE NAME OPEN_BRACES table_columns CLOSE_BRACES
 
-    $end            reduce using rule 57 (empty -> .)
+    $end            reduce using rule 58 (empty -> .)
     METHOD          shift and go to state 5
     TABLE           shift and go to state 6
 
@@ -279,13 +280,13 @@ state 13
     (17) endpoint -> . DOT endpoint_not_start
     (18) endpoint -> . UPDIR_SEGMENT endpoint_not_start
     (19) endpoint -> . endpoint_not_start
-    (57) empty -> .
+    (58) empty -> .
     (20) endpoint_not_start -> . PATH_SEGMENT opt_endpoint
     (21) endpoint_not_start -> . CAPTURING_SEGMENT opt_endpoint
 
     DOT             shift and go to state 10
     UPDIR_SEGMENT   shift and go to state 12
-    LAMBDA          reduce using rule 57 (empty -> .)
+    LAMBDA          reduce using rule 58 (empty -> .)
     PATH_SEGMENT    shift and go to state 13
     CAPTURING_SEGMENT shift and go to state 14
 
@@ -302,13 +303,13 @@ state 14
     (17) endpoint -> . DOT endpoint_not_start
     (18) endpoint -> . UPDIR_SEGMENT endpoint_not_start
     (19) endpoint -> . endpoint_not_start
-    (57) empty -> .
+    (58) empty -> .
     (20) endpoint_not_start -> . PATH_SEGMENT opt_endpoint
     (21) endpoint_not_start -> . CAPTURING_SEGMENT opt_endpoint
 
     DOT             shift and go to state 10
     UPDIR_SEGMENT   shift and go to state 12
-    LAMBDA          reduce using rule 57 (empty -> .)
+    LAMBDA          reduce using rule 58 (empty -> .)
     PATH_SEGMENT    shift and go to state 13
     CAPTURING_SEGMENT shift and go to state 14
 
@@ -334,15 +335,15 @@ state 16
     (30) command -> . EXCLUDE compound_name_list
     (31) command -> . JOIN db_query
     (32) command -> . SELECT db_query
-    (44) raw_value -> . STRING
-    (45) raw_value -> . INTEGER
-    (46) raw_value -> . DOUBLE
-    (47) raw_value -> . BOOLEAN
-    (48) raw_value -> . NULL
-    (49) raw_value -> . list
-    (50) raw_value -> . object
-    (51) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
-    (54) object -> . OPEN_BRACES object_elements CLOSE_BRACES
+    (45) raw_value -> . STRING
+    (46) raw_value -> . INTEGER
+    (47) raw_value -> . DOUBLE
+    (48) raw_value -> . BOOLEAN
+    (49) raw_value -> . NULL
+    (50) raw_value -> . list
+    (51) raw_value -> . object
+    (52) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
+    (55) object -> . OPEN_BRACES object_elements CLOSE_BRACES
 
     DOLLAR_SIGN     shift and go to state 27
     FORMAT          shift and go to state 28
@@ -411,10 +412,10 @@ state 23
     (5) table_columns -> . table_column table_columns_not_whitespace
     (6) table_columns -> . empty
     (9) table_column -> . NAME COLON table_column_type opt_table_column_types SEMICOLON
-    (57) empty -> .
+    (58) empty -> .
 
     NAME            shift and go to state 41
-    CLOSE_BRACES    reduce using rule 57 (empty -> .)
+    CLOSE_BRACES    reduce using rule 58 (empty -> .)
 
     table_columns                  shift and go to state 42
     table_column                   shift and go to state 43
@@ -432,10 +433,10 @@ state 25
     (24) statement -> command . commands
     (25) commands -> . PIPE command commands
     (26) commands -> . empty
-    (57) empty -> .
+    (58) empty -> .
 
     PIPE            shift and go to state 47
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
 
     commands                       shift and go to state 46
     empty                          shift and go to state 48
@@ -469,11 +470,11 @@ state 29
     (34) compound_name_list -> . empty
     (37) compound_name -> . NAME DOT compound_name
     (38) compound_name -> . NAME
-    (57) empty -> .
+    (58) empty -> .
 
     NAME            shift and go to state 54
-    PIPE            reduce using rule 57 (empty -> .)
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    PIPE            reduce using rule 58 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
 
     compound_name_list             shift and go to state 51
     compound_name                  shift and go to state 52
@@ -482,7 +483,7 @@ state 29
 state 30
 
     (31) command -> JOIN . db_query
-    (43) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
+    (44) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
     (37) compound_name -> . NAME DOT compound_name
     (38) compound_name -> . NAME
 
@@ -494,7 +495,7 @@ state 30
 state 31
 
     (32) command -> SELECT . db_query
-    (43) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
+    (44) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
     (37) compound_name -> . NAME DOT compound_name
     (38) compound_name -> . NAME
 
@@ -505,89 +506,89 @@ state 31
 
 state 32
 
-    (44) raw_value -> STRING .
+    (45) raw_value -> STRING .
 
-    PIPE            reduce using rule 44 (raw_value -> STRING .)
-    SEMICOLON       reduce using rule 44 (raw_value -> STRING .)
-    COMMA           reduce using rule 44 (raw_value -> STRING .)
+    PIPE            reduce using rule 45 (raw_value -> STRING .)
+    SEMICOLON       reduce using rule 45 (raw_value -> STRING .)
+    COMMA           reduce using rule 45 (raw_value -> STRING .)
 
 
 state 33
 
-    (45) raw_value -> INTEGER .
+    (46) raw_value -> INTEGER .
 
-    PIPE            reduce using rule 45 (raw_value -> INTEGER .)
-    SEMICOLON       reduce using rule 45 (raw_value -> INTEGER .)
-    COMMA           reduce using rule 45 (raw_value -> INTEGER .)
+    PIPE            reduce using rule 46 (raw_value -> INTEGER .)
+    SEMICOLON       reduce using rule 46 (raw_value -> INTEGER .)
+    COMMA           reduce using rule 46 (raw_value -> INTEGER .)
 
 
 state 34
 
-    (46) raw_value -> DOUBLE .
+    (47) raw_value -> DOUBLE .
 
-    PIPE            reduce using rule 46 (raw_value -> DOUBLE .)
-    SEMICOLON       reduce using rule 46 (raw_value -> DOUBLE .)
-    COMMA           reduce using rule 46 (raw_value -> DOUBLE .)
+    PIPE            reduce using rule 47 (raw_value -> DOUBLE .)
+    SEMICOLON       reduce using rule 47 (raw_value -> DOUBLE .)
+    COMMA           reduce using rule 47 (raw_value -> DOUBLE .)
 
 
 state 35
 
-    (47) raw_value -> BOOLEAN .
+    (48) raw_value -> BOOLEAN .
 
-    PIPE            reduce using rule 47 (raw_value -> BOOLEAN .)
-    SEMICOLON       reduce using rule 47 (raw_value -> BOOLEAN .)
-    COMMA           reduce using rule 47 (raw_value -> BOOLEAN .)
+    PIPE            reduce using rule 48 (raw_value -> BOOLEAN .)
+    SEMICOLON       reduce using rule 48 (raw_value -> BOOLEAN .)
+    COMMA           reduce using rule 48 (raw_value -> BOOLEAN .)
 
 
 state 36
 
-    (48) raw_value -> NULL .
+    (49) raw_value -> NULL .
 
-    PIPE            reduce using rule 48 (raw_value -> NULL .)
-    SEMICOLON       reduce using rule 48 (raw_value -> NULL .)
-    COMMA           reduce using rule 48 (raw_value -> NULL .)
+    PIPE            reduce using rule 49 (raw_value -> NULL .)
+    SEMICOLON       reduce using rule 49 (raw_value -> NULL .)
+    COMMA           reduce using rule 49 (raw_value -> NULL .)
 
 
 state 37
 
-    (49) raw_value -> list .
+    (50) raw_value -> list .
 
-    PIPE            reduce using rule 49 (raw_value -> list .)
-    SEMICOLON       reduce using rule 49 (raw_value -> list .)
-    COMMA           reduce using rule 49 (raw_value -> list .)
+    PIPE            reduce using rule 50 (raw_value -> list .)
+    SEMICOLON       reduce using rule 50 (raw_value -> list .)
+    COMMA           reduce using rule 50 (raw_value -> list .)
 
 
 state 38
 
-    (50) raw_value -> object .
+    (51) raw_value -> object .
 
-    PIPE            reduce using rule 50 (raw_value -> object .)
-    SEMICOLON       reduce using rule 50 (raw_value -> object .)
-    COMMA           reduce using rule 50 (raw_value -> object .)
+    PIPE            reduce using rule 51 (raw_value -> object .)
+    SEMICOLON       reduce using rule 51 (raw_value -> object .)
+    COMMA           reduce using rule 51 (raw_value -> object .)
 
 
 state 39
 
-    (51) list -> OPEN_BRACKET . list_elements CLOSE_BRACKET
-    (52) list_elements -> . raw_value COMMA list_elements
-    (53) list_elements -> . empty
-    (44) raw_value -> . STRING
-    (45) raw_value -> . INTEGER
-    (46) raw_value -> . DOUBLE
-    (47) raw_value -> . BOOLEAN
-    (48) raw_value -> . NULL
-    (49) raw_value -> . list
-    (50) raw_value -> . object
-    (57) empty -> .
-    (51) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
-    (54) object -> . OPEN_BRACES object_elements CLOSE_BRACES
+    (52) list -> OPEN_BRACKET . list_elements CLOSE_BRACKET
+    (53) list_elements -> . raw_value COMMA list_elements
+    (54) list_elements -> . empty
+    (45) raw_value -> . STRING
+    (46) raw_value -> . INTEGER
+    (47) raw_value -> . DOUBLE
+    (48) raw_value -> . BOOLEAN
+    (49) raw_value -> . NULL
+    (50) raw_value -> . list
+    (51) raw_value -> . object
+    (58) empty -> .
+    (52) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
+    (55) object -> . OPEN_BRACES object_elements CLOSE_BRACES
 
     STRING          shift and go to state 32
     INTEGER         shift and go to state 33
     DOUBLE          shift and go to state 34
     BOOLEAN         shift and go to state 35
     NULL            shift and go to state 36
-    CLOSE_BRACKET   reduce using rule 57 (empty -> .)
+    CLOSE_BRACKET   reduce using rule 58 (empty -> .)
     OPEN_BRACKET    shift and go to state 39
     OPEN_BRACES     shift and go to state 40
 
@@ -599,13 +600,13 @@ state 39
 
 state 40
 
-    (54) object -> OPEN_BRACES . object_elements CLOSE_BRACES
-    (55) object_elements -> . STRING COLON raw_value COMMA object_elements
-    (56) object_elements -> . empty
-    (57) empty -> .
+    (55) object -> OPEN_BRACES . object_elements CLOSE_BRACES
+    (56) object_elements -> . STRING COLON raw_value COMMA object_elements
+    (57) object_elements -> . empty
+    (58) empty -> .
 
     STRING          shift and go to state 62
-    CLOSE_BRACES    reduce using rule 57 (empty -> .)
+    CLOSE_BRACES    reduce using rule 58 (empty -> .)
 
     object_elements                shift and go to state 61
     empty                          shift and go to state 63
@@ -630,10 +631,10 @@ state 43
     (7) table_columns_not_whitespace -> . table_column table_columns_not_whitespace
     (8) table_columns_not_whitespace -> . empty
     (9) table_column -> . NAME COLON table_column_type opt_table_column_types SEMICOLON
-    (57) empty -> .
+    (58) empty -> .
 
     NAME            shift and go to state 41
-    CLOSE_BRACES    reduce using rule 57 (empty -> .)
+    CLOSE_BRACES    reduce using rule 58 (empty -> .)
 
     table_column                   shift and go to state 66
     table_columns_not_whitespace   shift and go to state 67
@@ -671,15 +672,15 @@ state 47
     (30) command -> . EXCLUDE compound_name_list
     (31) command -> . JOIN db_query
     (32) command -> . SELECT db_query
-    (44) raw_value -> . STRING
-    (45) raw_value -> . INTEGER
-    (46) raw_value -> . DOUBLE
-    (47) raw_value -> . BOOLEAN
-    (48) raw_value -> . NULL
-    (49) raw_value -> . list
-    (50) raw_value -> . object
-    (51) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
-    (54) object -> . OPEN_BRACES object_elements CLOSE_BRACES
+    (45) raw_value -> . STRING
+    (46) raw_value -> . INTEGER
+    (47) raw_value -> . DOUBLE
+    (48) raw_value -> . BOOLEAN
+    (49) raw_value -> . NULL
+    (50) raw_value -> . list
+    (51) raw_value -> . object
+    (52) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
+    (55) object -> . OPEN_BRACES object_elements CLOSE_BRACES
 
     DOLLAR_SIGN     shift and go to state 27
     FORMAT          shift and go to state 28
@@ -735,11 +736,11 @@ state 52
     (33) compound_name_list -> compound_name . compound_name_list_not_start
     (35) compound_name_list_not_start -> . COMMA compound_name compound_name_list_not_start
     (36) compound_name_list_not_start -> . empty
-    (57) empty -> .
+    (58) empty -> .
 
     COMMA           shift and go to state 71
-    PIPE            reduce using rule 57 (empty -> .)
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    PIPE            reduce using rule 58 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
 
     compound_name_list_not_start   shift and go to state 70
     empty                          shift and go to state 72
@@ -774,7 +775,7 @@ state 55
 
 state 56
 
-    (43) db_query -> compound_name . OPEN_PAREN db_query_list CLOSE_PAREN
+    (44) db_query -> compound_name . OPEN_PAREN db_query_list CLOSE_PAREN
 
     OPEN_PAREN      shift and go to state 74
 
@@ -789,44 +790,44 @@ state 57
 
 state 58
 
-    (51) list -> OPEN_BRACKET list_elements . CLOSE_BRACKET
+    (52) list -> OPEN_BRACKET list_elements . CLOSE_BRACKET
 
     CLOSE_BRACKET   shift and go to state 75
 
 
 state 59
 
-    (52) list_elements -> raw_value . COMMA list_elements
+    (53) list_elements -> raw_value . COMMA list_elements
 
     COMMA           shift and go to state 76
 
 
 state 60
 
-    (53) list_elements -> empty .
+    (54) list_elements -> empty .
 
-    CLOSE_BRACKET   reduce using rule 53 (list_elements -> empty .)
+    CLOSE_BRACKET   reduce using rule 54 (list_elements -> empty .)
 
 
 state 61
 
-    (54) object -> OPEN_BRACES object_elements . CLOSE_BRACES
+    (55) object -> OPEN_BRACES object_elements . CLOSE_BRACES
 
     CLOSE_BRACES    shift and go to state 77
 
 
 state 62
 
-    (55) object_elements -> STRING . COLON raw_value COMMA object_elements
+    (56) object_elements -> STRING . COLON raw_value COMMA object_elements
 
     COLON           shift and go to state 78
 
 
 state 63
 
-    (56) object_elements -> empty .
+    (57) object_elements -> empty .
 
-    CLOSE_BRACES    reduce using rule 56 (object_elements -> empty .)
+    CLOSE_BRACES    reduce using rule 57 (object_elements -> empty .)
 
 
 state 64
@@ -855,10 +856,10 @@ state 66
     (7) table_columns_not_whitespace -> . table_column table_columns_not_whitespace
     (8) table_columns_not_whitespace -> . empty
     (9) table_column -> . NAME COLON table_column_type opt_table_column_types SEMICOLON
-    (57) empty -> .
+    (58) empty -> .
 
     NAME            shift and go to state 41
-    CLOSE_BRACES    reduce using rule 57 (empty -> .)
+    CLOSE_BRACES    reduce using rule 58 (empty -> .)
 
     table_column                   shift and go to state 66
     table_columns_not_whitespace   shift and go to state 82
@@ -883,10 +884,10 @@ state 69
     (25) commands -> PIPE command . commands
     (25) commands -> . PIPE command commands
     (26) commands -> . empty
-    (57) empty -> .
+    (58) empty -> .
 
     PIPE            shift and go to state 47
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
 
     commands                       shift and go to state 83
     empty                          shift and go to state 48
@@ -929,18 +930,19 @@ state 73
 
 state 74
 
-    (43) db_query -> compound_name OPEN_PAREN . db_query_list CLOSE_PAREN
+    (44) db_query -> compound_name OPEN_PAREN . db_query_list CLOSE_PAREN
     (39) db_query_list -> . db_query_item COMMA db_query_list
-    (40) db_query_list -> . empty
-    (41) db_query_item -> . db_query
-    (42) db_query_item -> . NAME
-    (57) empty -> .
-    (43) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
+    (40) db_query_list -> . db_query_item
+    (41) db_query_list -> . empty
+    (42) db_query_item -> . db_query
+    (43) db_query_item -> . NAME
+    (58) empty -> .
+    (44) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
     (37) compound_name -> . NAME DOT compound_name
     (38) compound_name -> . NAME
 
     NAME            shift and go to state 90
-    CLOSE_PAREN     reduce using rule 57 (empty -> .)
+    CLOSE_PAREN     reduce using rule 58 (empty -> .)
 
     compound_name                  shift and go to state 56
     db_query_list                  shift and go to state 86
@@ -950,35 +952,35 @@ state 74
 
 state 75
 
-    (51) list -> OPEN_BRACKET list_elements CLOSE_BRACKET .
+    (52) list -> OPEN_BRACKET list_elements CLOSE_BRACKET .
 
-    PIPE            reduce using rule 51 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
-    SEMICOLON       reduce using rule 51 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
-    COMMA           reduce using rule 51 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
+    PIPE            reduce using rule 52 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
+    SEMICOLON       reduce using rule 52 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
+    COMMA           reduce using rule 52 (list -> OPEN_BRACKET list_elements CLOSE_BRACKET .)
 
 
 state 76
 
-    (52) list_elements -> raw_value COMMA . list_elements
-    (52) list_elements -> . raw_value COMMA list_elements
-    (53) list_elements -> . empty
-    (44) raw_value -> . STRING
-    (45) raw_value -> . INTEGER
-    (46) raw_value -> . DOUBLE
-    (47) raw_value -> . BOOLEAN
-    (48) raw_value -> . NULL
-    (49) raw_value -> . list
-    (50) raw_value -> . object
-    (57) empty -> .
-    (51) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
-    (54) object -> . OPEN_BRACES object_elements CLOSE_BRACES
+    (53) list_elements -> raw_value COMMA . list_elements
+    (53) list_elements -> . raw_value COMMA list_elements
+    (54) list_elements -> . empty
+    (45) raw_value -> . STRING
+    (46) raw_value -> . INTEGER
+    (47) raw_value -> . DOUBLE
+    (48) raw_value -> . BOOLEAN
+    (49) raw_value -> . NULL
+    (50) raw_value -> . list
+    (51) raw_value -> . object
+    (58) empty -> .
+    (52) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
+    (55) object -> . OPEN_BRACES object_elements CLOSE_BRACES
 
     STRING          shift and go to state 32
     INTEGER         shift and go to state 33
     DOUBLE          shift and go to state 34
     BOOLEAN         shift and go to state 35
     NULL            shift and go to state 36
-    CLOSE_BRACKET   reduce using rule 57 (empty -> .)
+    CLOSE_BRACKET   reduce using rule 58 (empty -> .)
     OPEN_BRACKET    shift and go to state 39
     OPEN_BRACES     shift and go to state 40
 
@@ -990,25 +992,25 @@ state 76
 
 state 77
 
-    (54) object -> OPEN_BRACES object_elements CLOSE_BRACES .
+    (55) object -> OPEN_BRACES object_elements CLOSE_BRACES .
 
-    PIPE            reduce using rule 54 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
-    SEMICOLON       reduce using rule 54 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
-    COMMA           reduce using rule 54 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
+    PIPE            reduce using rule 55 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
+    SEMICOLON       reduce using rule 55 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
+    COMMA           reduce using rule 55 (object -> OPEN_BRACES object_elements CLOSE_BRACES .)
 
 
 state 78
 
-    (55) object_elements -> STRING COLON . raw_value COMMA object_elements
-    (44) raw_value -> . STRING
-    (45) raw_value -> . INTEGER
-    (46) raw_value -> . DOUBLE
-    (47) raw_value -> . BOOLEAN
-    (48) raw_value -> . NULL
-    (49) raw_value -> . list
-    (50) raw_value -> . object
-    (51) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
-    (54) object -> . OPEN_BRACES object_elements CLOSE_BRACES
+    (56) object_elements -> STRING COLON . raw_value COMMA object_elements
+    (45) raw_value -> . STRING
+    (46) raw_value -> . INTEGER
+    (47) raw_value -> . DOUBLE
+    (48) raw_value -> . BOOLEAN
+    (49) raw_value -> . NULL
+    (50) raw_value -> . list
+    (51) raw_value -> . object
+    (52) list -> . OPEN_BRACKET list_elements CLOSE_BRACKET
+    (55) object -> . OPEN_BRACES object_elements CLOSE_BRACES
 
     STRING          shift and go to state 32
     INTEGER         shift and go to state 33
@@ -1038,11 +1040,11 @@ state 80
     (11) opt_table_column_types -> . empty
     (12) table_column_types -> . table_column_type table_column_types
     (13) table_column_types -> . table_column_type
-    (57) empty -> .
+    (58) empty -> .
     (14) table_column_type -> . NAME
     (15) table_column_type -> . FK OPEN_PAREN NAME DOT NAME AS NAME CLOSE_PAREN
 
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
     NAME            shift and go to state 79
     FK              shift and go to state 81
 
@@ -1077,11 +1079,11 @@ state 84
     (35) compound_name_list_not_start -> COMMA compound_name . compound_name_list_not_start
     (35) compound_name_list_not_start -> . COMMA compound_name compound_name_list_not_start
     (36) compound_name_list_not_start -> . empty
-    (57) empty -> .
+    (58) empty -> .
 
     COMMA           shift and go to state 71
-    PIPE            reduce using rule 57 (empty -> .)
-    SEMICOLON       reduce using rule 57 (empty -> .)
+    PIPE            reduce using rule 58 (empty -> .)
+    SEMICOLON       reduce using rule 58 (empty -> .)
 
     compound_name_list_not_start   shift and go to state 98
     empty                          shift and go to state 72
@@ -1098,7 +1100,7 @@ state 85
 
 state 86
 
-    (43) db_query -> compound_name OPEN_PAREN db_query_list . CLOSE_PAREN
+    (44) db_query -> compound_name OPEN_PAREN db_query_list . CLOSE_PAREN
 
     CLOSE_PAREN     shift and go to state 99
 
@@ -1106,45 +1108,49 @@ state 86
 state 87
 
     (39) db_query_list -> db_query_item . COMMA db_query_list
+    (40) db_query_list -> db_query_item .
 
     COMMA           shift and go to state 100
+    CLOSE_PAREN     reduce using rule 40 (db_query_list -> db_query_item .)
 
 
 state 88
 
-    (40) db_query_list -> empty .
+    (41) db_query_list -> empty .
 
-    CLOSE_PAREN     reduce using rule 40 (db_query_list -> empty .)
+    CLOSE_PAREN     reduce using rule 41 (db_query_list -> empty .)
 
 
 state 89
 
-    (41) db_query_item -> db_query .
+    (42) db_query_item -> db_query .
 
-    COMMA           reduce using rule 41 (db_query_item -> db_query .)
+    COMMA           reduce using rule 42 (db_query_item -> db_query .)
+    CLOSE_PAREN     reduce using rule 42 (db_query_item -> db_query .)
 
 
 state 90
 
-    (42) db_query_item -> NAME .
+    (43) db_query_item -> NAME .
     (37) compound_name -> NAME . DOT compound_name
     (38) compound_name -> NAME .
 
-    COMMA           reduce using rule 42 (db_query_item -> NAME .)
+    COMMA           reduce using rule 43 (db_query_item -> NAME .)
+    CLOSE_PAREN     reduce using rule 43 (db_query_item -> NAME .)
     DOT             shift and go to state 73
     OPEN_PAREN      reduce using rule 38 (compound_name -> NAME .)
 
 
 state 91
 
-    (52) list_elements -> raw_value COMMA list_elements .
+    (53) list_elements -> raw_value COMMA list_elements .
 
-    CLOSE_BRACKET   reduce using rule 52 (list_elements -> raw_value COMMA list_elements .)
+    CLOSE_BRACKET   reduce using rule 53 (list_elements -> raw_value COMMA list_elements .)
 
 
 state 92
 
-    (55) object_elements -> STRING COLON raw_value . COMMA object_elements
+    (56) object_elements -> STRING COLON raw_value . COMMA object_elements
 
     COMMA           shift and go to state 101
 
@@ -1203,27 +1209,29 @@ state 98
 
 state 99
 
-    (43) db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .
+    (44) db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .
 
-    PIPE            reduce using rule 43 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
-    SEMICOLON       reduce using rule 43 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
-    COMMA           reduce using rule 43 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
+    PIPE            reduce using rule 44 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
+    SEMICOLON       reduce using rule 44 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
+    COMMA           reduce using rule 44 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 44 (db_query -> compound_name OPEN_PAREN db_query_list CLOSE_PAREN .)
 
 
 state 100
 
     (39) db_query_list -> db_query_item COMMA . db_query_list
     (39) db_query_list -> . db_query_item COMMA db_query_list
-    (40) db_query_list -> . empty
-    (41) db_query_item -> . db_query
-    (42) db_query_item -> . NAME
-    (57) empty -> .
-    (43) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
+    (40) db_query_list -> . db_query_item
+    (41) db_query_list -> . empty
+    (42) db_query_item -> . db_query
+    (43) db_query_item -> . NAME
+    (58) empty -> .
+    (44) db_query -> . compound_name OPEN_PAREN db_query_list CLOSE_PAREN
     (37) compound_name -> . NAME DOT compound_name
     (38) compound_name -> . NAME
 
     NAME            shift and go to state 90
-    CLOSE_PAREN     reduce using rule 57 (empty -> .)
+    CLOSE_PAREN     reduce using rule 58 (empty -> .)
 
     db_query_item                  shift and go to state 87
     db_query_list                  shift and go to state 105
@@ -1233,13 +1241,13 @@ state 100
 
 state 101
 
-    (55) object_elements -> STRING COLON raw_value COMMA . object_elements
-    (55) object_elements -> . STRING COLON raw_value COMMA object_elements
-    (56) object_elements -> . empty
-    (57) empty -> .
+    (56) object_elements -> STRING COLON raw_value COMMA . object_elements
+    (56) object_elements -> . STRING COLON raw_value COMMA object_elements
+    (57) object_elements -> . empty
+    (58) empty -> .
 
     STRING          shift and go to state 62
-    CLOSE_BRACES    reduce using rule 57 (empty -> .)
+    CLOSE_BRACES    reduce using rule 58 (empty -> .)
 
     object_elements                shift and go to state 106
     empty                          shift and go to state 63
@@ -1275,9 +1283,9 @@ state 105
 
 state 106
 
-    (55) object_elements -> STRING COLON raw_value COMMA object_elements .
+    (56) object_elements -> STRING COLON raw_value COMMA object_elements .
 
-    CLOSE_BRACES    reduce using rule 55 (object_elements -> STRING COLON raw_value COMMA object_elements .)
+    CLOSE_BRACES    reduce using rule 56 (object_elements -> STRING COLON raw_value COMMA object_elements .)
 
 
 state 107

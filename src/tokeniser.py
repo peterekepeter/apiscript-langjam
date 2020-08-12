@@ -129,9 +129,12 @@ def percent_decode(encoded: str) -> str:
 def t_CAPTURING_SEGMENT(t):
     r'/\{([a-z_]+):([a-z_]+)\.([a-z_]+)\}'
     m = re.match(r'/\{([a-z_]+):([a-z_]+)\.([a-z_]+)\}', t.value)
+    name, table, field = m.groups()
     t.value = {
         'type': 'capturing',
-        'value': m.groups()
+        'name': name,
+        'table': table,
+        'field': field
     }
     return t
 

@@ -32,7 +32,10 @@ def p_program_table(p):
 
 def p_table_definition(p):
     """table_definition : TABLE NAME OPEN_BRACES table_columns CLOSE_BRACES"""
-    p[0] = p[4]
+    p[0] = {
+        'name': p[2],
+        'columns': p[4]
+    }
 
 
 def p_table_columns(p):
@@ -214,17 +217,18 @@ def p_compound_name(p):
     if len(p) == 3:
         p[0] = (p[1], *p[3])
     else:
-        p[0] = ()
+        p[0] = (p[1],)
 
 
 def p_db_query_list(p):
     """db_query_list : db_query_item COMMA db_query_list
+                     | db_query_item
                      | empty
     """
     if len(p) == 4:
         p[0] = (p[1], *p[3])
     else:
-        p[0] = ()
+        p[0] = (p[1],) or ()
 
 
 def p_db_query_item(p):
