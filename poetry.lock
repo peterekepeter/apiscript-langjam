@@ -1,0 +1,31 @@
+[[package]]
+category = "main"
+description = "Emoji for Python"
+name = "emoji"
+optional = false
+python-versions = "*"
+version = "0.6.0"
+
+[package.extras]
+dev = ["pytest", "coverage", "coveralls"]
+
+[[package]]
+category = "main"
+description = "Python Lex & Yacc"
+name = "ply"
+optional = false
+python-versions = "*"
+version = "3.11"
+
+[metadata]
+content-hash = "3375edb481334f6d93019fd75c5c781873c255ac606f0a86b3194c8fab5b0f13"
+python-versions = "^3.8"
+
+[metadata.files]
+emoji = [
+    {file = "emoji-0.6.0.tar.gz", hash = "sha256:e42da4f8d648f8ef10691bc246f682a1ec6b18373abfd9be10ec0b398823bd11"},
+]
+ply = [
+    {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
+    {file = "ply-3.11.tar.gz", hash = "sha256:00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"},
+]
