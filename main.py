@@ -4,7 +4,7 @@ import os
 from src.parser import parser
 from src.tokeniser import make_lexer
 
-lexer=make_lexer()
+lexer = make_lexer()
 
 def run_file(file_path):
     with open(file_path) as f:

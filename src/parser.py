@@ -163,7 +163,7 @@ def p_command_raw(p):
     """command : raw_value"""
     p[0] = {
         'type': 'assignment',
-        'value': p[1]
+        'parameters': p[1]
     }
 
 

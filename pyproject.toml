@@ -2,12 +2,14 @@
 name = "apiscript-langjam"
 version = "0.1.0"
 description = ""
-authors = ["repl.it user <replituser@example.com>"]
+authors = ["Artemis", "21"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 ply = "^3.11"
 emoji = "^0.6.0"
+Flask = "^1.1.2"
+peewee = "^3.13.3"
 
 [tool.poetry.dev-dependencies]
 

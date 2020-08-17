@@ -96,7 +96,10 @@ def t_DOUBLE(t):
 
 def t_BOOLEAN(t):
     r'(true|false)'
-    t.value = t.value == 'true'
+    t.value = {
+        'type': 'boolean',
+        'value': t.value == 'true'
+    }
     return t
 
 
@@ -118,6 +121,10 @@ def t_STRING(t):
     ).replace(
         r'\\t', '\t'
     )
+    t.value = {
+        'type': 'string',
+        'value': t.value
+    }
     return t
 
 
