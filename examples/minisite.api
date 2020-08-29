@@ -1,0 +1,6 @@
+
+GET / => "<a href='version'>version</a><br/><a href='hello'>hello</a>";
+
+GET /hello => "Hello World!";
+
+GET /version => "1.0";

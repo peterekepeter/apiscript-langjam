@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+import json
 import typing
 
 import peewee as pw
+import playhouse
 
 import werkzeug
 import flask
 
-from parser import parser
+from .parser import parser
 
 
 FIELD_TYPES = {
@@ -29,6 +31,16 @@ FIELD_ARGS = {
     # TODO: Add more field args, see
     # https://docs.peewee-orm.com/en/3.6.0/peewee/models.html#field-initialization-arguments
 }
+
+
+class JSONModelEncoder(json.JSONEncoder):
+    """An extended JSON encoder to handle encoding models."""
+
+    def default(self, obj: typing.Any):
+        """Convert to JSON."""
+        if isinstance(obj, pw.Model):
+            obj = playhouse.model_to_dict(obj)
+        return super().default(obj)
 
 
 class StatementContext:
@@ -70,10 +82,27 @@ class StatementContext:
             value = params['value']
         self.current_value = value
 
+    def op_format(self, param: str):
+        """Format the current data in a specified format."""
+        if param.lower() == 'json':
+            # TODO: Set content-type header
+            self.current_value = JSONModelEncoder.encode(self.current_value)
+        else:
+            raise ValueError(f'Unknown format: "{param}".')
+
+    def op_exclude(self):
+        pass # TODO
+
+    def op_join(self):
+        pass # TODO
+
+    def op_select(self):
+        pass # TODO
+
 
 class Context:
     "Serves as a state container for execution"
-    
+
     def __init__(self, source: typing.Union[str, dict]):
         """Store source and parse if necessary."""
         if isinstance(source, str):
@@ -99,10 +128,13 @@ class Context:
 
     def setup(self):
         """Build the ORM and Flask mappings."""
-        self.build_tables()
-        self.build_endpoints()
+        self.__build_tables()
+        self.__build_endpoints()
 
-    def build_tables(self):
+    def run(self, host, port):
+        self.app.run(host=host, port=port)
+
+    def __build_tables(self):
         """Set up Peewee and initialise the database."""
         for table in self.source['tables']:
             class ApiScriptTable(pw.Model):
@@ -111,7 +143,7 @@ class Context:
                     db_table = table['name']
             fields = {}
             for column in table['columns']:
-                field, main_type = self.build_field(column['type'])
+                field, main_type = self.__build_field(column['type'])
                 field.add_to_class(ApiScriptTable, column['name'])
                 fields[column['name']] = main_type
             self.table_mapping[table['name']] = {
@@ -121,7 +153,7 @@ class Context:
         self.db.connect()
         self.db.create_tables(self.table_mapping.values())
 
-    def build_field(self, type_specs: typing.List[dict]) -> pw.Field:
+    def __build_field(self, type_specs: typing.List[dict]) -> pw.Field:
         """Build a Peewee field."""
         class_ = None
         main_type = None
@@ -144,17 +176,17 @@ class Context:
         else:
             raise TypeError('Missing type specifier.')
 
-    def build_endpoints(self):
+    def __build_endpoints(self):
         """Build the flask endpoints."""
         for n, endpoint in enumerate(self.source['endpoints']):
-            route = self.resolve_path(endpoint['endpoint'])
+            route = self.__resolve_path(endpoint['endpoint'])
             self.app.add_url_rule(
                 route, str(n),
                 StatementContext(endpoint['statement'], self),
                 methods=[endpoint['method']]
             )
 
-    def resolve_path(self, segments: typing.List[dict]) -> str:
+    def __resolve_path(self, segments: typing.List[dict]) -> str:
         """Convert a parsed path to a Flask path."""
         path = ''
         for segment in segments:
